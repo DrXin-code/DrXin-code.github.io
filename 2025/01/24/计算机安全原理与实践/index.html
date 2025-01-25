@@ -1,0 +1,805 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>计算机安全原理与实践 | Dr.xin's Universe</title><meta name="author" content="Dr.xin"><meta name="copyright" content="Dr.xin"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="本文主要汇总了计网安的知识文档">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机安全原理与实践">
+<meta property="og:url" content="http://example.com/2025/01/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AE%89%E5%85%A8%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5/index.html">
+<meta property="og:site_name" content="Dr.xin&#39;s Universe">
+<meta property="og:description" content="本文主要汇总了计网安的知识文档">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2025/01/25/Cwc12OyBXVihnlq.jpg">
+<meta property="article:published_time" content="2025-01-24T10:44:50.084Z">
+<meta property="article:modified_time" content="2025-01-24T16:19:02.736Z">
+<meta property="article:author" content="Dr.xin">
+<meta property="article:tag" content="大二">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2025/01/25/Cwc12OyBXVihnlq.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "计算机安全原理与实践",
+  "url": "http://example.com/2025/01/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AE%89%E5%85%A8%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5/",
+  "image": "https://s2.loli.net/2025/01/25/Cwc12OyBXVihnlq.jpg",
+  "datePublished": "2025-01-24T10:44:50.084Z",
+  "dateModified": "2025-01-24T16:19:02.736Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Dr.xin",
+      "url": "http://example.com/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="https://s2.loli.net/2025/01/25/AEXnqBI2mdy7tLz.jpg"><link rel="canonical" href="http://example.com/2025/01/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AE%89%E5%85%A8%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '计算机安全原理与实践',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load', preloader.endLoading)
+
+  if (false) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div id="web_bg" style="background-image: url(https://s2.loli.net/2025/01/25/OMBcQvyYD1N8LoK.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://s2.loli.net/2025/01/25/AEXnqBI2mdy7tLz.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://s2.loli.net/2025/01/25/Cwc12OyBXVihnlq.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Dr.xin's Universe</span></a><a class="nav-page-title" href="/"><span class="site-name">计算机安全原理与实践</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">计算机安全原理与实践</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-01-24T10:44:50.084Z" title="发表于 2025-01-24 18:44:50">2025-01-24</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-01-24T16:19:02.736Z" title="更新于 2025-01-25 00:19:02">2025-01-25</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%B8%93%E4%B8%9A%E8%AF%BE/">专业课</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">4.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>14分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="计算机安全原理与实践"><a href="#计算机安全原理与实践" class="headerlink" title="计算机安全原理与实践"></a>计算机安全原理与实践</h1><h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h2><ul>
+<li>关键目标：机密性、完整性、可用性 CIA+ 真实性、可说明性</li>
+<li>计算机中的资源：硬件、软件、数据、通信线路和网络</li>
+<li>攻击形式：主动攻击、被动攻击、内部攻击、外部攻击</li>
+</ul>
+<h2 id="2-密码"><a href="#2-密码" class="headerlink" title="2.密码"></a>2.密码</h2><ul>
+<li><p>攻击对称加密：密码分析、蛮力攻击</p>
+</li>
+<li><p>ECB（电子密码本、电话本）模式应用广泛：规律性、容易被破译</p>
+</li>
+<li></li>
+<li><p>非对称加密：RSA、ECC（椭圆曲线密码加密）、Diffie-Hellman 密钥协议、数字签名标准(DSS)</p>
+</li>
+</ul>
+<h2 id="3-用户认证"><a href="#3-用户认证" class="headerlink" title="3.用户认证"></a>3.用户认证</h2><p><strong>数字用户认证方法</strong></p>
+<ul>
+<li>四个认证方法：个人信息、物品（令牌）、生理特征（静态生物特征）、行为特征（动态生物特征）</li>
+<li>三个风险评估独立概念：置信等级、潜在影响、风险范围</li>
+</ul>
+<p><strong>基于口令的认证</strong></p>
+<ul>
+<li><p>口令作用：<strong>口令系统是对于抵御入侵者应用最广泛的方法手段</strong></p>
+</li>
+<li><p>用户ID的三个作用</p>
+<ul>
+<li>决定了用户是否被授权访问系统</li>
+<li>决定了该用户所拥有的的访问权限</li>
+<li>应用在自主访问控制机制中</li>
+</ul>
+</li>
+<li><p>四个口令破解方法</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">可以通过设置足够大的盐值以及设置较长的散列值来进行对抗</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>字典攻击</li>
+<li>彩虹表攻击</li>
+<li>猜测较短、带有用户喜好的口令</li>
+<li>开源口令破解器</li>
+</ul>
+</li>
+<li><p>应对措施</p>
+<ul>
+<li>口令文件访问控制</li>
+<li>使用入侵检测技术对不安全行为识别</li>
+<li>重新设置不安全口令</li>
+<li>口令的限制balabla</li>
+</ul>
+</li>
+<li><p>四种口令选择策略</p>
+<ul>
+<li>用户教育</li>
+<li>计算机生成口令</li>
+<li>后验口令检查：系统周期性地运行自己的口令破解程序来找到容易被猜测到的口令</li>
+<li>先验口令检查：选择密码的时候计算机进行检查—口令检查器、Bloom 过滤器</li>
+</ul>
+</li>
+<li><p>Salt目的</p>
+<ul>
+<li>防止复制的口令在口令文件中可见</li>
+<li>增加离线口令字典攻击难度</li>
+<li>避免被发现用户使用多个同一口令</li>
+</ul>
+</li>
+<li><p>保护口令文件：影子口令文件</p>
+</li>
+</ul>
+<p><strong>基于令牌的认证</strong></p>
+<ul>
+<li>智能卡与普通卡：<ul>
+<li>智能卡一般是指带有接触式或者非接触式芯片的卡</li>
+<li>普通卡一般是指普通胶印印刷的卡片，磁条、不带芯片，不具有加密感应功能，电子接口</li>
+</ul>
+</li>
+</ul>
+<p><strong>用户认证中的安全问题</strong></p>
+<ul>
+<li>窃听、主机攻击、重放、客户端攻击、特洛伊木马攻击、拒绝服务</li>
+</ul>
+<h2 id="4-访问控制"><a href="#4-访问控制" class="headerlink" title="4.访问控制"></a>4.访问控制</h2><h3 id="访问控制原理"><a href="#访问控制原理" class="headerlink" title="访问控制原理"></a>访问控制原理</h3><p>访问控制：授予或拒绝下列特定要求的过程: (1) 获得并使用信息及相关信息处理服务；(2) 进入特定物理设施 。实现依据安全策略对使用系统资源进行控制，仅许可授权实体（用户、程序、进程或其他系统）依据该策略使用该系统资源。”<strong>用来实现和保证计算机系统的安全服务的措施，特别****是保证访问控制服务的措施。</strong></p>
+<ul>
+<li><p>自主访问控制 (DAC)</p>
+</li>
+<li><p>强制访问控制 (MAC)</p>
+</li>
+<li><p>基于角色的访问控制(RBAC)</p>
+</li>
+<li><p>基于属性的访问控制(ABAC)</p>
+</li>
+<li><p>主体：访问客体的实体</p>
+</li>
+<li><p>客体：外界对其访问受到控制的资源一个用来包含或接收信息的实体</p>
+</li>
+<li><p>访问权：描述了主体访问客体的方式</p>
+</li>
+</ul>
+<h3 id="DAC"><a href="#DAC" class="headerlink" title="DAC"></a>DAC</h3><p><strong>定义</strong>：指一个实体可以被授权按其自己的意志使另一个实体能够访问某些资源。</p>
+<p>访问矩阵：矩阵中的每项表示一个特定主体对一个特定客体的访问权。</p>
+<p><strong>保护域</strong>：访问矩阵的规定，一行定义一个保护域</p>
+<h3 id="RBAC"><a href="#RBAC" class="headerlink" title="RBAC"></a>RBAC</h3><p><strong>约束</strong>：互斥角色、基数、先决条件角色</p>
+<h3 id="ABAC"><a href="#ABAC" class="headerlink" title="ABAC"></a>ABAC</h3><ul>
+<li>优点：它的灵活性以及表达能力。</li>
+<li>缺点：需要考虑每次访问对资源和用户属性的评价所造成的性能影响。</li>
+</ul>
+<p>应用：web、XAMCL（可扩展的访问扩展语言）、云服务</p>
+<p><strong>ABAC系统能够实现 DAC、RBAC和 MAC 的思想。</strong></p>
+<p><strong>属性</strong></p>
+<ul>
+<li>主体</li>
+<li>客体</li>
+<li>环境</li>
+</ul>
+<p><strong>策略</strong>：一组用来管理组织内部的允许行为的规则和关系，其基础是主体所具有的特权，以及在哪种环境条件下资源或客体需要被保护。</p>
+<h2 id="5-数据库与云安全"><a href="#5-数据库与云安全" class="headerlink" title="5.数据库与云安全"></a>5.数据库与云安全</h2><h3 id="数据库管理系统"><a href="#数据库管理系统" class="headerlink" title="数据库管理系统"></a>数据库管理系统</h3><ul>
+<li>数据库：存储一个或多个应用所用的结构化数据集合</li>
+<li>DBMS（数据库管理系统）：它是创建、维护数据 库的程序套件。为多个用户和应用提供特定的查询服务</li>
+<li>DDL（数据定义语言）</li>
+<li>DML（数据操纵语言）</li>
+</ul>
+<h3 id="关系数据库"><a href="#关系数据库" class="headerlink" title="关系数据库"></a>关系数据库</h3><p><strong>关系数据库的基本构件是数据表</strong></p>
+<ul>
+<li>关系数据库的结构使得多个表通过在所有表中都出现的唯一标识符联系在一起</li>
+<li>用户和应用通过关系查询语言来访问数据库—-SQL（结构化查询语言）</li>
+<li>关系：表&#x2F;文件  元组：行&#x2F;记录  属性：列&#x2F;字段</li>
+<li>主键：用来唯一地标识表的一行  它由一个或多个列名组成 </li>
+<li>外键：在一个表中定义为主键的属性必须作为另一个表的属性出现</li>
+<li>视图&#x2F;虚表：视图是从一个或多个表中返回的选定行与列的查询结果，视图经常用于<strong>安全目的</strong>。</li>
+</ul>
+<h3 id="SQL-注入攻击"><a href="#SQL-注入攻击" class="headerlink" title="SQL 注入攻击"></a>SQL 注入攻击</h3><p><strong>用途</strong>：修改或删除数据 、 执行任意操作系统命令 、启动拒绝服务(DoS)攻击</p>
+<p>五个<strong>类型</strong></p>
+<ul>
+<li>用户输入</li>
+<li>服务器变量：HTTP头部、网络协议头部、环境变量等</li>
+<li>二阶注入</li>
+<li>cookie</li>
+<li>物理用户输入</li>
+</ul>
+<p><strong>攻击分类</strong></p>
+<ul>
+<li>带内（inband）<ul>
+<li>重言： or 1&#x3D;&#x3D;1</li>
+<li>行尾注释</li>
+<li>捎带查询</li>
+</ul>
+</li>
+<li>推理（inferential）<ul>
+<li>非法&#x2F;逻辑错误查询：错误返回显示</li>
+<li>盲SQL注入：错误无显示</li>
+</ul>
+</li>
+<li>带外（out-of-band）<ul>
+<li>检索信道</li>
+</ul>
+</li>
+</ul>
+<p><strong>防御措施</strong></p>
+<ul>
+<li>防御性编码<ul>
+<li>手动防御性编码实践</li>
+<li>参数化查询插入</li>
+<li>SQL DOM：</li>
+</ul>
+</li>
+<li>检测<ul>
+<li>基于签名</li>
+<li>基于异常</li>
+<li>代码分析</li>
+</ul>
+</li>
+<li>运行时阻断<ul>
+<li>在运行时检测查询是否与预期查询模型一致</li>
+</ul>
+</li>
+</ul>
+<p><strong>数据库访问控制</strong></p>
+<p>DBMS管理策略</p>
+<ul>
+<li>集中管理：特权用户</li>
+<li>基于所有权的管理：创建者可以授予和回收该表的访问权</li>
+<li>分散管理：创建者可以给其他用户授权</li>
+</ul>
+<p><strong>级联授权</strong></p>
+<p><strong>基于角色的访问控制</strong></p>
+<p>将用户分为三类</p>
+<ul>
+<li>应用程序属主</li>
+<li>应用程序属主外的终端用户</li>
+<li>管理员</li>
+</ul>
+<p><strong>能力</strong></p>
+<ul>
+<li>创建删除角色</li>
+<li>定义角色的许可</li>
+<li>分配和取消用户到角色的分配</li>
+</ul>
+<p><strong>数据库加密</strong></p>
+<p>缺点：</p>
+<ul>
+<li>密钥管理：复杂</li>
+<li>不灵活</li>
+</ul>
+<h2 id="6-恶意软件"><a href="#6-恶意软件" class="headerlink" title="6.恶意软件"></a>6.恶意软件</h2><p><strong>定义</strong></p>
+<p>一种被(往往是秘密地)植入系统中，以损害受害者数据、应用程序或操作系统的机密性、完整性或可用性，抑或对用户实施骚扰或妨碍的程序。</p>
+<p><strong>分类</strong></p>
+<ul>
+<li><p>传播方式</p>
+</li>
+<li><p>工作方式、有效载荷</p>
+</li>
+<li><p>需要宿主：寄生代码、病毒</p>
+</li>
+<li><p>不需要宿主：蠕虫、木马、bot</p>
+</li>
+<li><p>可以复制：病毒、蠕虫</p>
+</li>
+<li><p>不可以复制：木马、垃圾邮件</p>
+</li>
+</ul>
+<h3 id="APT"><a href="#APT" class="headerlink" title="APT"></a><strong>APT</strong></h3><p><strong>高级持续性威胁</strong></p>
+<ul>
+<li>高级：综合性程序</li>
+<li>持续性</li>
+<li>威胁</li>
+</ul>
+<h3 id="病毒"><a href="#病毒" class="headerlink" title="病毒"></a><strong>病毒</strong></h3><p><strong>组成</strong></p>
+<ul>
+<li>感染机制：aka感染向量</li>
+<li>触发条件：aka逻辑炸弹</li>
+<li>有效载荷：</li>
+</ul>
+<p><strong>阶段</strong></p>
+<ul>
+<li>潜伏</li>
+<li>触发</li>
+<li>传播</li>
+<li>执行</li>
+</ul>
+<p><strong>分类</strong></p>
+<ul>
+<li>依据目标<ul>
+<li>感染引导区病毒</li>
+<li>感染可执行文件病毒</li>
+<li>宏病毒</li>
+<li>多元复合型病毒</li>
+</ul>
+</li>
+<li>依据<strong>隐蔽方式</strong><ul>
+<li>加密型病毒</li>
+<li>隐蔽型病毒</li>
+<li>多态病毒</li>
+<li>变形病毒</li>
+</ul>
+</li>
+</ul>
+<h3 id="蠕虫"><a href="#蠕虫" class="headerlink" title="蠕虫"></a>蠕虫</h3><p><strong>传播方式</strong></p>
+<ul>
+<li>电子邮件或即时通信工具</li>
+<li>文件共享</li>
+<li>远程执行能力</li>
+<li>远程文件访问或传输能力</li>
+<li>远程登录能力</li>
+</ul>
+<p><strong>扫描发现方式</strong></p>
+<ul>
+<li><p>扫描</p>
+</li>
+<li><p>随机式探索：大量流量，容易被提前中断</p>
+</li>
+<li><p>黑名单</p>
+</li>
+<li><p>拓扑式探索</p>
+</li>
+<li><p>本地子网</p>
+</li>
+</ul>
+<p><strong>特点</strong></p>
+<ul>
+<li>多平台</li>
+<li>多种攻击手段</li>
+<li>超快速传播</li>
+<li>多态</li>
+<li>变形</li>
+<li>其他恶意代码的传输载体</li>
+<li>0-day攻击</li>
+</ul>
+<p><strong>客户端漏洞和路过式下载</strong>（夹带式下载）</p>
+<p>利用应用程序中的缺陷( bug)来安装恶意软件。使得当用户浏览一个受攻击者控制的Web页面时，该页面包含的代码会攻击该浏览器的缺<br>陷并在用户不知情或未允许的情况下向系统安装恶意软件。等待那些无防备的用户浏览恶意的 Web页面来传播</p>
+<ul>
+<li>变种—水坑式攻击：攻击者通过研究他们意图攻击的目标，确定他们可能要浏览的Web站点，然后扫描这些站点找出那些含有能让他们植入夹带式下载的漏洞。</li>
+</ul>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p><strong>社工</strong></p>
+<ul>
+<li>垃圾邮件</li>
+<li>特洛伊木马</li>
+<li>手机木马</li>
+</ul>
+<p><strong>Bot</strong></p>
+<p>IRC—-&gt;HTTP</p>
+<ul>
+<li>与蠕虫的区别是：在于是否具有远程控制能力<br> 蠕虫是自我复制并自我激活<br> bot是由某种形式的指挥控制服务器网络控制的</li>
+</ul>
+<h3 id="对抗手段"><a href="#对抗手段" class="headerlink" title="对抗手段"></a>对抗手段</h3><p>恶意软件预防措施的<strong>四个要素</strong></p>
+<ul>
+<li>规则</li>
+<li>警惕性</li>
+<li>弥补弱点</li>
+<li>缓解威胁</li>
+</ul>
+<p>预防失败的缓解三个措施</p>
+<ul>
+<li>检测</li>
+<li>识别</li>
+<li>清除</li>
+</ul>
+<p>反病毒软件的发展划分</p>
+<ul>
+<li>简单的扫描：通配符、特征码</li>
+<li>启发式扫描器：另一种方法是完整性检查–校验和</li>
+<li>活动陷阱：内存驻留程序识别病毒行为</li>
+<li>全面保护：沙箱分析设计最困难的部分是确定执行每次解释(interpretation)所需的时间</li>
+</ul>
+<p><strong>方法</strong></p>
+<ul>
+<li>杀毒软件</li>
+<li>砂箱分析</li>
+<li>基于主机的行为阻断软件</li>
+<li>间谍软件的检测和清除</li>
+<li>边界扫描方法<ul>
+<li>入口监控软件</li>
+<li>出口监控软件</li>
+<li></li>
+</ul>
+</li>
+<li>分布式情报收集方法</li>
+</ul>
+<h2 id="7-拒绝服务攻击"><a href="#7-拒绝服务攻击" class="headerlink" title="7.拒绝服务攻击"></a>7.拒绝服务攻击</h2><p><strong>定义</strong></p>
+<p>​	DOS攻击是指利用网络协议漏洞或其它系统以及应用软件漏洞耗尽被攻击目标CPU、内存、带宽、磁盘等系统资源，使得被攻击的计算机网络无法正常提供服务，直至系统停止响应甚至崩溃的攻击方式</p>
+<p><strong>攻击对象</strong></p>
+<ul>
+<li>网络带宽</li>
+<li>系统资源</li>
+<li>应用资源：web</li>
+</ul>
+<h3 id="泛洪攻击"><a href="#泛洪攻击" class="headerlink" title="泛洪攻击"></a>泛洪攻击</h3><p><strong>目标</strong>：占据所有到目标组织的网络连接的容量</p>
+<p><strong>分类</strong></p>
+<ul>
+<li>ICMP泛洪水</li>
+<li>UDP泛洪</li>
+<li>TCP SYN泛洪：与SYN欺骗区别：攻击的对象是数据包的总量而不是目标系统上的网络处理程序</li>
+</ul>
+<h3 id="SYN欺骗"><a href="#SYN欺骗" class="headerlink" title="SYN欺骗"></a>SYN欺骗</h3><p><strong>目的</strong>：系统资源；通过造成服务器上用于管理TCP连接的连接表溢出，从而攻击网络服务器响应TCP连接请求</p>
+<h3 id="分布式拒绝服务攻击DDOS"><a href="#分布式拒绝服务攻击DDOS" class="headerlink" title="分布式拒绝服务攻击DDOS"></a>分布式拒绝服务攻击DDOS</h3><ul>
+<li>攻击者</li>
+<li>执行者（Zombie）</li>
+<li>代理端（Zombie）：执行与代理通信加密 by IRC</li>
+</ul>
+<h3 id="基于应用的带宽攻击"><a href="#基于应用的带宽攻击" class="headerlink" title="基于应用的带宽攻击"></a>基于应用的带宽攻击</h3><ul>
+<li>SIP洪洪</li>
+<li>HTTP洪泛攻击</li>
+<li>Slowloris（Based on https）：半开耗尽原理、不完整的HTTP请求（合理的HTTP流量）、现有依赖特征检测的入侵检测和入侵防御手段无法识别出Slowloris</li>
+</ul>
+<p><strong>防范</strong></p>
+<p>延迟绑定、关键比特提取分析</p>
+<h3 id="反射攻击与放大攻击"><a href="#反射攻击与放大攻击" class="headerlink" title="反射攻击与放大攻击"></a><strong>反射攻击与放大攻击</strong></h3><p>利用网络服务系统的正常功能</p>
+<ul>
+<li>反射攻击：<strong>防范</strong>：过滤数据包、小流量—&gt;大流量、构建回路死循环、DNS、UDP，成功的要求：生成带有虚假源地址的数据包</li>
+<li>放大攻击：<strong>防范</strong>：防止使用虚假地址；泛洪、Smurf（ICMP）Fraggle（UDP）<strong>广播数据包</strong>—–不能用TCP，TCP面向连接无广播、DNS</li>
+</ul>
+<h3 id="防范"><a href="#防范" class="headerlink" title="防范"></a><strong>防范</strong></h3><p><em>不可能完全预防DoS攻击</em></p>
+<p>四道防线</p>
+<p><strong>响应</strong>668</p>
+<h2 id="8-入侵检测"><a href="#8-入侵检测" class="headerlink" title="8.入侵检测"></a>8.入侵检测</h2><h3 id="入侵者"><a href="#入侵者" class="headerlink" title="入侵者"></a>入侵者</h3><p>入侵者分类</p>
+<ul>
+<li>网络罪犯</li>
+<li>活动家</li>
+<li>国家资助的组织</li>
+<li>其他</li>
+</ul>
+<p>入侵者水平分类</p>
+<ul>
+<li>学徒</li>
+<li>训练有素者</li>
+<li>高手</li>
+</ul>
+<p>行为分类</p>
+<ul>
+<li>目标获取和信息收集</li>
+<li>初始访问</li>
+<li>权限提升</li>
+<li>信息收集或系统利用</li>
+<li>维持访问权限</li>
+<li>覆盖痕迹</li>
+</ul>
+<h3 id="IDS概述"><a href="#IDS概述" class="headerlink" title="IDS概述"></a>IDS概述</h3><p><strong>安全入侵</strong>：未经授权绕过系统安全机制的行为</p>
+<p><strong>入侵检测</strong>：一种硬件或软件功能，该功能用于收集和分析计算机或网络中各个区域的信息，以识别可能的安全入侵</p>
+<p><strong>IDS组成</strong></p>
+<ul>
+<li>传感器：收集数据</li>
+<li>分析器：确认是否发生了入侵</li>
+<li>用户接口：查看或控制系统的行为</li>
+</ul>
+<p><strong>IDS分类</strong></p>
+<ul>
+<li>HIDS基于主机的IDS：监测主机</li>
+<li>NIDS基于网络的IDS：检测网络流量、传输、协议</li>
+<li>分布式或混合式IDS：集成在一个中央分析器中</li>
+</ul>
+<p><strong>误报</strong>：对入侵性行为定义大，将用户误认为入侵者</p>
+<p><strong>漏报</strong>：范围小，漏过真实的入侵者</p>
+<h3 id="分析方法"><a href="#分析方法" class="headerlink" title="分析方法"></a>分析方法</h3><ul>
+<li>异常检测：行为数据统计分析，<strong>可检测零日攻击</strong><ul>
+<li>统计法</li>
+<li>基于知识法</li>
+<li>机器学习法</li>
+</ul>
+</li>
+<li>特征或启发式检测：aka误用检测，只能识别已有的攻击<ul>
+<li>特征方法</li>
+<li>基于规则的启发式识别</li>
+</ul>
+</li>
+</ul>
+<h3 id="HIDS"><a href="#HIDS" class="headerlink" title="HIDS"></a>HIDS</h3><ul>
+<li><p>数据源和传感器</p>
+<p>​    数据源</p>
+<ul>
+<li>系统调用踪迹</li>
+<li>审计记录</li>
+<li>文件完整性校验和</li>
+<li>注册表访问</li>
+</ul>
+</li>
+</ul>
+<p>分类</p>
+<ul>
+<li><p>异常HIDS</p>
+</li>
+<li><p>特征或启发式HIDS</p>
+</li>
+<li><p>分布式HIDS</p>
+<p>组成</p>
+<ul>
+<li><p>主机代理模块</p>
+</li>
+<li><p>局域网监测代理模块</p>
+</li>
+<li><p>中央管理器模块：从主机代理模块和局域网监测代理模块接受并分析</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="NIDS"><a href="#NIDS" class="headerlink" title="NIDS"></a>NIDS</h3><p>网络流量、传输层、网络层、应用层</p>
+<p>组成</p>
+<ul>
+<li>传感器</li>
+<li>服务器：一个或多个管理NIDS</li>
+<li>管理控制台：一个或多个提供人机交互接口</li>
+</ul>
+<p>位置</p>
+<p><strong>入侵检测技术</strong></p>
+<p>+状态协议分析 (SPA)：缺点是它所需要的高资源占用。</p>
+<p><strong>分布式或混合式入侵检测</strong></p>
+<p><strong>入侵检测交换格式</strong></p>
+<ul>
+<li>入侵检测消息交换要求</li>
+<li>入侵检测消息交换格式</li>
+<li>入侵检测交换协议</li>
+</ul>
+<h3 id="蜜罐"><a href="#蜜罐" class="headerlink" title="蜜罐"></a>蜜罐</h3><p>功能</p>
+<ul>
+<li>转移攻击者对重要系统的访问</li>
+<li>收集有关攻击者的活动信息</li>
+<li>引诱攻击者在系统中逗留足够长的时间，以便于管理员对此攻击做出响应</li>
+</ul>
+<p><em>这些系统充满了虚构的信息，这些信息看起来很有价值， 但系统的合法用户无法访问。  没有产出的资源  任何与蜜罐系统通信的尝试很可能是一个探测、扫描或者攻击。  如果一个蜜罐发起对外通信，则系统可能已被破坏</em></p>
+<p>分类</p>
+<ul>
+<li>低交互蜜罐：由模拟IT服务或系统的软件包构成；无法提供所模拟服务或系统的全部功能</li>
+<li>高交互蜜罐：完整操作系统、服务以及应用程序的真实系统；<strong>缺点</strong>：需要极大的资源，并且一旦被攻破，就可能被用来发起对其他系统的攻击</li>
+</ul>
+<p>位置</p>
+<h3 id="Snort"><a href="#Snort" class="headerlink" title="Snort"></a>Snort</h3><p>体系架构</p>
+<ul>
+<li>数据包解码器</li>
+<li>检测引擎</li>
+<li>记录器</li>
+<li>报警器</li>
+</ul>
+<p>规则</p>
+<h2 id="9-防火墙"><a href="#9-防火墙" class="headerlink" title="9.防火墙"></a>9.防火墙</h2><h3 id="防火墙的必要性"><a href="#防火墙的必要性" class="headerlink" title="防火墙的必要性"></a>防火墙的必要性</h3><ul>
+<li>对互联网连接至关重要 </li>
+<li>保护局域网的有效手段</li>
+<li>在驻地网络和互联网络之间插入以建立受控连接 </li>
+<li>用作外围防御</li>
+</ul>
+<p><strong>设计目标</strong></p>
+<ul>
+<li>内外部的通信流量必须经过防火墙</li>
+<li>只有策略授权的流量才能通过防火墙</li>
+<li>防火墙本身不会被渗透</li>
+</ul>
+<p><strong>防火墙的过滤特征</strong></p>
+<ul>
+<li>IP地址和协议值：包过滤和状态检测</li>
+<li>应用层协议：应用程序级网关</li>
+<li>用户身份</li>
+<li>网络活动</li>
+</ul>
+<p><strong>局限性</strong></p>
+<ul>
+<li>无法组织绕开防火墙的攻击</li>
+<li>无法完全组织内部威胁</li>
+<li>不正确的安全无线局域网可以从组织外部访问 </li>
+<li>内部人员沾花惹草</li>
+</ul>
+<h3 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h3><p><strong>包过滤防火墙</strong></p>
+<p>规则</p>
+<ul>
+<li>源ip 目的ip</li>
+<li>源&#x2F;目的传输层地址</li>
+<li>IP协议域</li>
+<li>接口</li>
+</ul>
+<p>两种策略</p>
+<ul>
+<li><p>丢弃：阻止没有明确准许（保守可控，对用户可见）</p>
+</li>
+<li><p>转发：准许没有明确拒绝（易于管理使用，安全性差）</p>
+</li>
+<li><p>优点：简单；用户透明；处理速度快</p>
+</li>
+<li><p>缺点：无法阻止上层攻击（具体说）、有限的日志功能、不支持高级用户认证、易受TCP&#x2F;IP协议漏洞攻击（源地址欺骗）、配置不当会导致破坏</p>
+</li>
+</ul>
+<p>攻击</p>
+<ul>
+<li>IP欺骗</li>
+<li>源路由攻击</li>
+<li>IP细小分段</li>
+</ul>
+<p><strong>状态检测防火墙</strong></p>
+<p><em>通过建立一个出站TCP连接目录来强制执行TCP流量的规则</em></p>
+<p><strong>应用级网关</strong></p>
+<p><em>aka应用程序代理</em></p>
+<ul>
+<li>优点：比包过滤更安全</li>
+<li>缺点：增加每个连接上的额外处理开销</li>
+</ul>
+<p><strong>电路级网关</strong></p>
+<p><em>aka电路级代理</em></p>
+<p>e2e—&gt;两条连接;不检查内容；确定哪些连接被允许；通常在信任内部用户时使用；较低的管理费用</p>
+<h3 id="防火墙的布置"><a href="#防火墙的布置" class="headerlink" title="防火墙的布置"></a>防火墙的布置</h3><p>（优缺点记一下）</p>
+<ul>
+<li>堡垒主机 <em>：系统被认为是网络安全的一个关键强点 作为应用级或电路级网关的平台</em></li>
+<li>基于主机的防火墙</li>
+<li>个人防火墙</li>
+</ul>
+<h4 id="防火墙的部署与配置"><a href="#防火墙的部署与配置" class="headerlink" title="防火墙的部署与配置"></a>防火墙的部署与配置</h4><p><strong>DMZ</strong></p>
+<p><em>外防火墙和内防火墙之间的区域</em></p>
+<p><strong>VPN</strong></p>
+<p>虚拟专用网络</p>
+<p><strong>分布式防火墙</strong></p>
+<p><strong>防火墙部署和拓扑结构</strong></p>
+<p>（记一下各个图）</p>
+<h3 id="IPS入侵防御系统"><a href="#IPS入侵防御系统" class="headerlink" title="IPS入侵防御系统"></a>IPS入侵防御系统</h3><p><em>aka IDPS入侵检测和防御系统</em></p>
+<p>分类同上；策略2中（特启&#x2F;异）</p>
+<p><strong>HIPS</strong></p>
+<p><strong>NIPS</strong>识别恶意数据包的方法</p>
+<ul>
+<li>模式匹配</li>
+<li>传输异常</li>
+<li>状态匹配</li>
+<li>统计异常</li>
+<li>协议异常</li>
+</ul>
+<p><strong>数字免疫系统</strong></p>
+<p>IBM开发、全方面防御</p>
+<p><strong>Snort Inline</strong></p>
+<p>snort的改进版</p>
+<p>规则：丢弃、拒绝、简单丢弃（不做记录）、对蜜罐实现有用  </p>
+<p>攻击者看到了失败，但不能找出它发生的原因 </p>
+<p><strong>一体化威胁管理系统</strong></p>
+<h2 id="10-缓冲区溢出"><a href="#10-缓冲区溢出" class="headerlink" title="10.缓冲区溢出"></a>10.缓冲区溢出</h2><p><strong>防御措施</strong></p>
+<ol>
+<li>编译时防御：加固程序来抵抗在新程序中的攻击<ul>
+<li>使用现代高级程序语言–自动检查越界、额外资源销</li>
+<li>安全的编码技术    </li>
+<li>语言扩充和安全库的使用</li>
+<li>栈保护机制：设定函数入口和出口代码并检查其栈帧寻找有没有受到破坏的证据、stackguard（栈卫士）、Stackshield和返回地址防护者 (RAD)、随机的canary（金丝雀）值</li>
+</ul>
+</li>
+<li>运行时防御：在现有的程序中检测和终止攻击<ul>
+<li>可执行地址空间保护：虚拟内存保护栈和堆</li>
+<li>地址空间随机化</li>
+<li>Guard 页（隔开）：在进程的地址空间的关键区域、在栈帧之间，或者是在堆的不同的存储区域之间设置guard页；耗费时间和页需求</li>
+</ul>
+</li>
+</ol>
+<p><strong>攻击形式</strong></p>
+<ul>
+<li>栈溢出</li>
+<li>替换栈帧</li>
+<li>返回到系统调用</li>
+<li>堆溢出</li>
+<li>全局数据区溢出</li>
+</ul>
+<h2 id="11-软件安全-888"><a href="#11-软件安全-888" class="headerlink" title="11.软件安全 888"></a>11.软件安全 888</h2><h2 id="12-操作系统安全"><a href="#12-操作系统安全" class="headerlink" title="12.操作系统安全"></a>12.操作系统安全</h2><h2 id="13-云安全"><a href="#13-云安全" class="headerlink" title="13.云安全"></a>13.云安全</h2><h2 id="16"><a href="#16" class="headerlink" title="16."></a>16.</h2><h2 id="17"><a href="#17" class="headerlink" title="17."></a>17.</h2><h2 id="19"><a href="#19" class="headerlink" title="19."></a>19.</h2><h2 id="20"><a href="#20" class="headerlink" title="20."></a>20.</h2></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Dr.xin</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/01/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AE%89%E5%85%A8%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5/">http://example.com/2025/01/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AE%89%E5%85%A8%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">Dr.xin's Universe</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%A4%A7%E4%BA%8C/">大二</a></div><div class="post-share"><div class="social-share" data-image="https://s2.loli.net/2025/01/25/Cwc12OyBXVihnlq.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>交个朋友！</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/image/IMG_2009.JPG" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="/image/IMG_2009.JPG" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/image/IMG_2009.JPG" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="/image/IMG_2009.JPG" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/01/24/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%20/" title="操作系统"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://s2.loli.net/2025/01/25/EvMn6dXTgsA4QcB.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">操作系统</div></div><div class="info-2"><div class="info-item-1">[操作系统]1.并发 并行 多道特征（关键词固定 填空或者简答）特征需要好好背。实时系统的软硬文件系统分为？  操作系统的主要功能 进程的组成（pcb 栈什么 填空题） 信息安全不在考试范围内。以选择题出现了解即可。   最容易丢用户接口。 操作系统的基本特征重中之重 掌握圆盘里面的每一个概念 每一个概念可能会展开说。    谁最重要：并发性 1.4基本没咋考过2.第二章四十分以及更多同步最重要 死锁的避免预防接触不是一回事 住意选择题的混淆。  进程的pcb干什么的 原语和原子操作。7状态模型 哪些状态不可达和可达 为什么可达。图会画 箭头。  顺序性 封闭性这几个性质要掌握 填空题理解进程的特征。进程=balabla+balala。段不可忽略 选择题要注意！！！   交换和覆盖这一对也考的多。  挂起和阻塞考选择题（/什么会导致balabala） pcb里面包含的东西三个 常出。   模式（用户和内核 选择 以下哪个会导致模式的切换  原语很重要！！！ 进程的切换考得很多（以下哪个操作引起进程的切换 比较好的时机 选择题）。fork也考过很多次 很重要...</div></div></div></a><a class="pagination-related" href="/2025/01/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%94%E8%AE%B0/" title="计算机网络"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://s2.loli.net/2025/01/25/eVgRUhsG54LInc6.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">计算机网络</div></div><div class="info-2"><div class="info-item-1">简答题1.CSMA&#x2F;CD工作过程简述？ 2NAT过程？ 3.分组交换和电路交换优缺点？ 4.协议以及协议栈 5..为什么在因特网中用到了不同的 AS 间与 AS 内部协议？ 答：①策略——在多个 AS 之间，策略问题占主导地位。 很重要的是，来自指定 AS 的流量不 能通过另一个指定 AS。 同样，指定的 AS 可能希望控制它在其他多个 AS 之间携带的过境交 通。 在 AS 内部，所有的东西名义上都在相同的管理控制下，因此策略在选择 AS 中的路由方 面的作用要小得多。 ②规模——路由算法及其数据结构对处理大量网络的路由的能力是 AS 间 路由的一个关键问题。 在 AS 内部，可伸缩性不那么受关注。 首先，如果单个管理域变得太 大，则始终可以将其划分为两个 AS 并在两个新的 AS 之间执行 AS 间路由。 ③性能——由于 AS 间路由是以策略为导向的，因此所使用的路由的质量(例如性能)往往是次要的问题(即满足某 些策略标准的较长或更昂贵的路由很可能被接管到较短但不符合该标准的路由上)。 事实上， 我们看到，在 AS 之间，甚至没有与路线相关的成本概念(除了 AS...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/01/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%94%E8%AE%B0/" title="计算机网络"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://s2.loli.net/2025/01/25/eVgRUhsG54LInc6.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-24</div><div class="info-item-2">计算机网络</div></div><div class="info-2"><div class="info-item-1">简答题1.CSMA&#x2F;CD工作过程简述？ 2NAT过程？ 3.分组交换和电路交换优缺点？ 4.协议以及协议栈 5..为什么在因特网中用到了不同的 AS 间与 AS 内部协议？ 答：①策略——在多个 AS 之间，策略问题占主导地位。 很重要的是，来自指定 AS 的流量不 能通过另一个指定 AS。 同样，指定的 AS 可能希望控制它在其他多个 AS 之间携带的过境交 通。 在 AS 内部，所有的东西名义上都在相同的管理控制下，因此策略在选择 AS 中的路由方 面的作用要小得多。 ②规模——路由算法及其数据结构对处理大量网络的路由的能力是 AS 间 路由的一个关键问题。 在 AS 内部，可伸缩性不那么受关注。 首先，如果单个管理域变得太 大，则始终可以将其划分为两个 AS 并在两个新的 AS 之间执行 AS 间路由。 ③性能——由于 AS 间路由是以策略为导向的，因此所使用的路由的质量(例如性能)往往是次要的问题(即满足某 些策略标准的较长或更昂贵的路由很可能被接管到较短但不符合该标准的路由上)。 事实上， 我们看到，在 AS 之间，甚至没有与路线相关的成本概念(除了 AS...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://s2.loli.net/2025/01/25/AEXnqBI2mdy7tLz.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Dr.xin</div><div class="author-info-description">Fighting!</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/DrXin-code"><i class="fab fa-github"></i><span>I want a star!</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/DrXin-code" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://user.qzone.qq.com/1411423062" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="https://weixin.qq.com/r/13325313816" target="_blank" title="WeChat"><i class="fab fa-weixin"></i></a><a class="social-icon" href="tel:+13325313816" target="_blank" title="Mobile Number"><i class="fas fa-mobile"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">百废待兴，看官不要着急！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AE%89%E5%85%A8%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5"><span class="toc-number">1.</span> <span class="toc-text">计算机安全原理与实践</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%A6%82%E8%BF%B0"><span class="toc-number">1.1.</span> <span class="toc-text">1.概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%AF%86%E7%A0%81"><span class="toc-number">1.2.</span> <span class="toc-text">2.密码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81"><span class="toc-number">1.3.</span> <span class="toc-text">3.用户认证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6"><span class="toc-number">1.4.</span> <span class="toc-text">4.访问控制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E5%8E%9F%E7%90%86"><span class="toc-number">1.4.1.</span> <span class="toc-text">访问控制原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DAC"><span class="toc-number">1.4.2.</span> <span class="toc-text">DAC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RBAC"><span class="toc-number">1.4.3.</span> <span class="toc-text">RBAC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ABAC"><span class="toc-number">1.4.4.</span> <span class="toc-text">ABAC</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E4%BA%91%E5%AE%89%E5%85%A8"><span class="toc-number">1.5.</span> <span class="toc-text">5.数据库与云安全</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.5.1.</span> <span class="toc-text">数据库管理系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">1.5.2.</span> <span class="toc-text">关系数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SQL-%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB"><span class="toc-number">1.5.3.</span> <span class="toc-text">SQL 注入攻击</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6"><span class="toc-number">1.6.</span> <span class="toc-text">6.恶意软件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#APT"><span class="toc-number">1.6.1.</span> <span class="toc-text">APT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%97%85%E6%AF%92"><span class="toc-number">1.6.2.</span> <span class="toc-text">病毒</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A0%95%E8%99%AB"><span class="toc-number">1.6.3.</span> <span class="toc-text">蠕虫</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-number">1.6.4.</span> <span class="toc-text">其他</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E6%8A%97%E6%89%8B%E6%AE%B5"><span class="toc-number">1.6.5.</span> <span class="toc-text">对抗手段</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E6%8B%92%E7%BB%9D%E6%9C%8D%E5%8A%A1%E6%94%BB%E5%87%BB"><span class="toc-number">1.7.</span> <span class="toc-text">7.拒绝服务攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%9B%E6%B4%AA%E6%94%BB%E5%87%BB"><span class="toc-number">1.7.1.</span> <span class="toc-text">泛洪攻击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SYN%E6%AC%BA%E9%AA%97"><span class="toc-number">1.7.2.</span> <span class="toc-text">SYN欺骗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E6%8B%92%E7%BB%9D%E6%9C%8D%E5%8A%A1%E6%94%BB%E5%87%BBDDOS"><span class="toc-number">1.7.3.</span> <span class="toc-text">分布式拒绝服务攻击DDOS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E5%BA%94%E7%94%A8%E7%9A%84%E5%B8%A6%E5%AE%BD%E6%94%BB%E5%87%BB"><span class="toc-number">1.7.4.</span> <span class="toc-text">基于应用的带宽攻击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84%E6%94%BB%E5%87%BB%E4%B8%8E%E6%94%BE%E5%A4%A7%E6%94%BB%E5%87%BB"><span class="toc-number">1.7.5.</span> <span class="toc-text">反射攻击与放大攻击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%B2%E8%8C%83"><span class="toc-number">1.7.6.</span> <span class="toc-text">防范</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B"><span class="toc-number">1.8.</span> <span class="toc-text">8.入侵检测</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%A5%E4%BE%B5%E8%80%85"><span class="toc-number">1.8.1.</span> <span class="toc-text">入侵者</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IDS%E6%A6%82%E8%BF%B0"><span class="toc-number">1.8.2.</span> <span class="toc-text">IDS概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95"><span class="toc-number">1.8.3.</span> <span class="toc-text">分析方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HIDS"><span class="toc-number">1.8.4.</span> <span class="toc-text">HIDS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NIDS"><span class="toc-number">1.8.5.</span> <span class="toc-text">NIDS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%9C%9C%E7%BD%90"><span class="toc-number">1.8.6.</span> <span class="toc-text">蜜罐</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Snort"><span class="toc-number">1.8.7.</span> <span class="toc-text">Snort</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-%E9%98%B2%E7%81%AB%E5%A2%99"><span class="toc-number">1.9.</span> <span class="toc-text">9.防火墙</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%B2%E7%81%AB%E5%A2%99%E7%9A%84%E5%BF%85%E8%A6%81%E6%80%A7"><span class="toc-number">1.9.1.</span> <span class="toc-text">防火墙的必要性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.9.2.</span> <span class="toc-text">类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%B2%E7%81%AB%E5%A2%99%E7%9A%84%E5%B8%83%E7%BD%AE"><span class="toc-number">1.9.3.</span> <span class="toc-text">防火墙的布置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%B2%E7%81%AB%E5%A2%99%E7%9A%84%E9%83%A8%E7%BD%B2%E4%B8%8E%E9%85%8D%E7%BD%AE"><span class="toc-number">1.9.3.1.</span> <span class="toc-text">防火墙的部署与配置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IPS%E5%85%A5%E4%BE%B5%E9%98%B2%E5%BE%A1%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.9.4.</span> <span class="toc-text">IPS入侵防御系统</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA"><span class="toc-number">1.10.</span> <span class="toc-text">10.缓冲区溢出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8-888"><span class="toc-number">1.11.</span> <span class="toc-text">11.软件安全 888</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8"><span class="toc-number">1.12.</span> <span class="toc-text">12.操作系统安全</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-%E4%BA%91%E5%AE%89%E5%85%A8"><span class="toc-number">1.13.</span> <span class="toc-text">13.云安全</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#16"><span class="toc-number">1.14.</span> <span class="toc-text">16.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#17"><span class="toc-number">1.15.</span> <span class="toc-text">17.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#19"><span class="toc-number">1.16.</span> <span class="toc-text">19.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#20"><span class="toc-number">1.17.</span> <span class="toc-text">20.</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/01/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%97%85%E6%AF%92/" title="计算机病毒"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://s2.loli.net/2025/01/25/4ulkBohrNSG2n7P.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="计算机病毒"/></a><div class="content"><a class="title" href="/2025/01/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%97%85%E6%AF%92/" title="计算机病毒">计算机病毒</a><time datetime="2025-01-24T10:44:50.102Z" title="发表于 2025-01-24 18:44:50">2025-01-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/01/24/%E4%BF%A1%E5%AE%89%E5%AE%9E%E9%AA%8C/" title="信安实验"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://s2.loli.net/2025/01/25/N8ieKFdAyqtLhYw.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="信安实验"/></a><div class="content"><a class="title" href="/2025/01/24/%E4%BF%A1%E5%AE%89%E5%AE%9E%E9%AA%8C/" title="信安实验">信安实验</a><time datetime="2025-01-24T10:44:50.099Z" title="发表于 2025-01-24 18:44:50">2025-01-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/01/24/%E7%B3%BB%E7%BB%9F%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/" title="系统与数据恢复"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://s2.loli.net/2025/01/25/pysncOqIevBC5jM.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="系统与数据恢复"/></a><div class="content"><a class="title" href="/2025/01/24/%E7%B3%BB%E7%BB%9F%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/" title="系统与数据恢复">系统与数据恢复</a><time datetime="2025-01-24T10:44:50.097Z" title="发表于 2025-01-24 18:44:50">2025-01-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/01/24/%E6%AF%9B%E6%A6%82/" title="毛概"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://s2.loli.net/2025/01/25/SHIhUrj3wQmE9ne.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="毛概"/></a><div class="content"><a class="title" href="/2025/01/24/%E6%AF%9B%E6%A6%82/" title="毛概">毛概</a><time datetime="2025-01-24T10:44:50.094Z" title="发表于 2025-01-24 18:44:50">2025-01-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/01/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%94%E8%AE%B0/" title="计算机网络"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://s2.loli.net/2025/01/25/eVgRUhsG54LInc6.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="计算机网络"/></a><div class="content"><a class="title" href="/2025/01/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%94%E8%AE%B0/" title="计算机网络">计算机网络</a><time datetime="2025-01-24T10:44:50.089Z" title="发表于 2025-01-24 18:44:50">2025-01-24</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2025 By Dr.xin</div><div class="footer_custom_text">I wish you to become your own sun, no need to rely on who's light.<p><a target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&logo=hexo" title="博客框架为Hexo"></a>&nbsp;<a target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&logo=bitdefender" title="主题采用butterfly"></a>&nbsp;<a target="_blank" href="https://www.jsdelivr.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://img.shields.io/badge/CDN-jsDelivr-orange?style=flat&logo=jsDelivr" title="本站使用JsDelivr为静态资源提供CDN加速"></a> &nbsp;<a target="_blank" href="https://vercel.com/ "><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://img.shields.io/badge/Hosted-Vervel-brightgreen?style=flat&logo=Vercel" title="本站采用双线部署，默认线路托管于Vercel"></a>&nbsp;<a target="_blank" href="https://vercel.com/ "><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://img.shields.io/badge/Hosted-Coding-0cedbe?style=flat&logo=Codio" title="本站采用双线部署，联通线路托管于Coding"></a>&nbsp;<a target="_blank" href="https://github.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://img.shields.io/badge/Source-Github-d021d6?style=flat&logo=GitHub" title="本站项目由Gtihub托管"></a>&nbsp;<a target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&logo=Claris" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"></a></p></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="true"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body></html>
